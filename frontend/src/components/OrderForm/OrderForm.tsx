@@ -1,5 +1,6 @@
-import React from 'react';
+// src/components/OrderForm/OrderForm.tsx
 import { useState } from 'react';
+import { Box, TextField, Select, MenuItem, Button, InputLabel, FormControl } from '@mui/material';
 import { submitOrder } from '../../services/orderService';
 
 const PRODUCTS = [
@@ -22,29 +23,32 @@ export default function OrderForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        id='text'
-        type="text"
-        placeholder="Customer Name"
+    <Box component="form" onSubmit={handleSubmit} sx={{ mb: 4 }}>
+      <TextField
+        label="Customer Name"
         value={customerName}
         onChange={e => setCustomerName(e.target.value)}
+        fullWidth
         required
-        style={{marginRight: '20px'}}
+        sx={{ mb: 2 }}
       />
-      <select
-        id='select'
-        value={productId}
-        onChange={e => setProductId(Number(e.target.value))}
-        style={{marginRight: '20px'}}
-      >
-        {PRODUCTS.map(p => (
-          <option key={p.id} value={p.id}>
-            {p.name} (${p.price})
-          </option>
-        ))}
-      </select>
-      <button type="submit">Submit Order</button>
-    </form>
+      <FormControl fullWidth sx={{ mb: 2 }}>
+        <InputLabel>Product</InputLabel>
+        <Select
+          value={productId}
+          label="Product"
+          onChange={e => setProductId(Number(e.target.value))}
+        >
+          {PRODUCTS.map(p => (
+            <MenuItem key={p.id} value={p.id}>
+              {p.name} (${p.price})
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <Button type="submit" variant="contained" fullWidth>
+        Submit Order
+      </Button>
+    </Box>
   );
 }

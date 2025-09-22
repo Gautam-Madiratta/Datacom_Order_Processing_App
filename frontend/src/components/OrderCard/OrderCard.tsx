@@ -1,21 +1,28 @@
-import type { Order } from '../../types/order';
+// src/components/OrderCard/OrderCard.tsx
+import { Card, CardContent, Typography, Chip, Stack } from '@mui/material';
+import { type Order } from '../../types/order';
 
 interface Props {
   order: Order;
 }
 
+const statusColorMap = {
+  Pending: 'warning',
+  Processing: 'info',
+  Completed: 'success',
+} as const;
+
 export default function OrderCard({ order }: Props) {
   return (
-    <div style={{
-      border: '1px solid #ccc',
-      padding: '1rem',
-      marginBottom: '1rem',
-      borderRadius: '6px'
-    }}>
-      <p><strong>ID:</strong> {order.id}</p>
-      <p><strong>Name:</strong> {order.customerName}</p>
-      <p><strong>Product ID:</strong> {order.productId}</p>
-      <p><strong>Status:</strong> {order.status}</p>
-    </div>
+    <Card variant="outlined" sx={{ mb: 2 }}>
+      <CardContent>
+        <Stack direction="row" justifyContent="space-between" alignItems="center">
+          <Typography variant="h6">Order #{order.id}</Typography>
+          <Chip label={order.status} color={statusColorMap[order.status]} />
+        </Stack>
+        <Typography><strong>Customer:</strong> {order.customerName}</Typography>
+        <Typography><strong>Product ID:</strong> {order.productId}</Typography>
+      </CardContent>
+    </Card>
   );
 }
