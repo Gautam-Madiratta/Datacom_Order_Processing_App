@@ -1,6 +1,6 @@
 # Datacom Order App – Full Stack Assignment
 
-This project includes a React + TypeScript frontend and a Node.js + TypeScript backend for managing customer orders with live status updates.
+This project includes a React + TypeScript + Mui frontend and a Node.js + TypeScript backend for managing customer orders with live status updates.
 
 ## 📁 Structure
 - [`frontend/`](./frontend): Submit and view orders
